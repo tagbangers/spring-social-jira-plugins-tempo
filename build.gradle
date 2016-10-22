@@ -1,0 +1,38 @@
+group 'jp.co.tagbangers'
+version '1.0.0.BUILD-SNAPSHOT-201610221550'
+description = 'JIRA TEMPO API'
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+apply from: 'publish-maven.gradle'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    compile("jp.co.tagbangers:spring-social-jira:$springSocialJiraVersion")
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.4")
+
+    compile("commons-lang:commons-lang:2.6")
+
+    testCompile("org.springframework:spring-test:$springVersion")
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
